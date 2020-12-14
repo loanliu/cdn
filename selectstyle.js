@@ -60,12 +60,12 @@
 			$(html).insertAfter($this);
 			
 		});
-
+		// compare all li, converted to lowercase by Loan
 		$("body").delegate( "div#ss_search input", "keyup", function(e) {
-			var val = $(this).val(), flag=false;
+			var val = $(this).val().toLowerCase(), flag=false;
 			$('#nosearch').remove();
 			$(this).parent().parent().find('li').each(function(index, el) {
-				if($(el).text().indexOf(val) > -1){
+				if($(el).text().toLowerCase().indexOf(val) > -1){
 					$(el).show();
 					flag=true;
 				}
@@ -94,13 +94,16 @@
 			$(this).parents('ul#select_style_ul').hide();
 			$(this).parents('ul#select_style_ul').parent('div').find('div#select_style_text').html(txt);
 			$('#'+sid).children('option').filter(function(){return $(this).val()==vl}).prop('selected',true).change();
+			//$("#promolist").find('div#select_style_text').html(txt);
+			$('#promolist').children('option').filter(function(){return $(this).val()==vl}).prop('selected',true).change();
+
 		});
 		$(document).delegate("body", "click", function(e) {
 			var clickedOn=$(e.target);
-			if(!clickedOn.parents().andSelf().is('ul#select_style_ul, div#select_style')){
+			/*if(!clickedOn.parents().andSelf().is('ul#select_style_ul, div#select_style')){
 				$('ul#select_style_ul').fadeOut(400);
 				$('div#ss_search').children('input').val('').trigger('keyup');
-			}
+			}*/
 		});
 	}
 })(jQuery);
